@@ -14,7 +14,6 @@ cat > /tmp/scan.att <<EOF
 {
     "invocation": {
       "parameters": null,
-      "uri": "https://localhost/test",
       "event_id": "FAKE_EVENT_ID",
       "builder.id": "FAKE_BUILDER_ID"
     },
@@ -33,11 +32,8 @@ EOF
 # Sign an image and upload the attestation
 cosign sign gcr.io/chainguard-demo/busybox
 
-# Bring up https://console.cloud.google.com/gcr/images/cosigndemo?project=cosigndemo
 cat $ATTESTATION | head -n 25 | pygmentize -l json -P style=vice
 cosign attest --type vuln --predicate /tmp/nginx.trivy.sarif gcr.io/chainguard-demo/busybox
-
-# Bring up https://console.cloud.google.com/gcr/images/cosigndemo?project=cosigndemo
 
 # Verify
 cosign verify gcr.io/chainguard-demo/busybox
