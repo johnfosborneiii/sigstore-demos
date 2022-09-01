@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # One-time instructions
-go install github.com/sigstore/gitsign@latest
-git clone https://github.com/johnfosborneiii/gitsign-demo.git
 cd /path/to/my/repository
 git config --local commit.gpgsign true  # Sign all commits
 git config --local gpg.x509.program gitsign  # Use Gitsign for signing
@@ -31,4 +29,4 @@ echo $cert
 cosign verify-blob --cert <(echo $cert | base64 --decode) --signature <(echo $sig | base64 --decode) <(git rev-parse HEAD | tr -d '\n')
 
 git push
-https://github.com/johnfosborneiii/gitsign-demo/blob/main/hello
+
